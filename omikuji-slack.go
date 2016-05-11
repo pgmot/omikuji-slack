@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,12 +25,8 @@ func main() {
 		log.Printf("%s", text)
 
 		nakami := strings.Split(text, ",")
-		nakamiLen := len(nakami)
-		if nakamiLen == 0 {
-			c.String(http.StatusOK, "example) /omikuji daikichi,kichi,kyou,daikyou")
-		} else {
-			c.String(http.StatusOK, nakami[rand.Intn(nakamiLen)])
-		}
+		rand.Seed(time.Now().UnixNano())
+		c.String(http.StatusOK, text+"\n"+nakami[rand.Intn(len(nakami))])
 	})
 	router.Run(":" + port)
 }
