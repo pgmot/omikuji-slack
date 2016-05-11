@@ -26,7 +26,10 @@ func main() {
 
 		nakami := strings.Split(text, ",")
 		rand.Seed(time.Now().UnixNano())
-		c.String(http.StatusOK, text+"\n"+nakami[rand.Intn(len(nakami))])
+		c.JSON(http.StatusOK, gin.H{
+			"text":          nakami[rand.Intn(len(nakami))],
+			"response_type": "in_channel",
+		})
 	})
 	router.Run(":" + port)
 }
