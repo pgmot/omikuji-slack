@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -19,6 +20,8 @@ func main() {
 	router.POST("/omikuji", func(c *gin.Context) {
 		text := c.PostForm("text")
 		log.Printf("%s", text)
+
+		c.String(http.StatusOK, text)
 	})
 	router.Run(":" + port)
 }
