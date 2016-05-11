@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -19,7 +18,7 @@ func main() {
 
 	router.POST("/omikuji", func(c *gin.Context) {
 		text := c.PostForm("text")
-		fmt.Printf("text: %s", text)
+		log.Printf("%s", text)
 	})
 	router.Run(":" + port)
 }
